@@ -8,6 +8,7 @@
   "scripts": {
     "dev:app": "bun run --watch packages/app/src/index.ts",
     "dev:web": "vite dev packages/web",
+    "dev": "bun run.ts",
     "build:app": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile packages/app/build/app packages/app/src/index.ts",
     "build:web": "vite build packages/web",
     "build": "bun run build:app && bun run build:web"
