@@ -1,0 +1,1 @@
+sudo docker run -itd --name redis-6379 --restart=always -p 6379:6379 redis --requirepass "@Super123456"
