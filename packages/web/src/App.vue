@@ -8,12 +8,21 @@ client.hi.get().then((res) => {
   msg.value = res.data || 'error'
 })
 
+// client.auth.register.post({
+//     username: 'test',
+//     email: 'test@gmail.com',
+//     password: 'Super123456'
+// }).then((res) => {
+//   console.log(res)
+// })
+
 client.auth.login.post({
-  username: 'admin',
-  password: 'admin'
+    email: 'test@gmail.com',
+    password: 'Super123452'
 }).then((res) => {
   console.log(res)
 })
+
 </script>
 
 <template>

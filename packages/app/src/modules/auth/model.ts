@@ -2,14 +2,32 @@
 import { t } from "elysia";
 
 export namespace AuthModel {
-  // Define a DTO for Elysia validation
-  export const signInBody = t.Object({
+  /** 注册 */
+  export const signUpBody = t.Object({
     username: t.String(),
+    email: t.String(),
     password: t.String(),
   });
-  // Define it as TypeScript type
-  export type signInBody = {
+  export type signUpBody = {
     username: string;
+    email: string;
+    password: string;
+  };
+  export const signUpResponse = t.Object({
+    _id: t.String(),
+    email: t.String(),
+  });
+  export type signUpResponse = {
+    _id: string;
+    email: string;
+  };
+  /** 登录 */
+  export const signInBody = t.Object({
+    email: t.String(),
+    password: t.String(),
+  });
+  export type signInBody = {
+    email: string;
     password: string;
   };
 

@@ -7,6 +7,7 @@ import './libs/redis'
 
 import { cors } from "@elysiajs/cors";
 import { auth } from "./modules/auth";
+import BetterAuth from "./libs/betterAuth";
 
 const app = new Elysia()
   .use(cors())
@@ -18,6 +19,9 @@ const app = new Elysia()
           "Access-Control-Allow-Headers": "*",
       }
   })
+  // better-auth
+  .mount(BetterAuth.handler)
+  // modules
   .use(auth)
   .get("/hi", "Hi, Elysia")
   .listen(config.server?.port || 3000);

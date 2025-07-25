@@ -7,6 +7,11 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   password: {
     type: String,
     required: true,
@@ -25,6 +30,7 @@ const admin = await userModel.findOne({ username: 'admin', role: "admin" });
 if (!admin) {
   await userModel.create({
     username: "admin",
+    email: "admin@admin.com",
     password: "public",
     role: "admin",
   });
