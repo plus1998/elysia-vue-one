@@ -1,4 +1,10 @@
 import { Elysia } from "elysia";
+import config from "./config";
+// mongodb
+import './libs/mongodb'
+// redis
+import './libs/redis'
+
 import { cors } from "@elysiajs/cors";
 import { auth } from "./modules/auth";
 
@@ -14,7 +20,7 @@ const app = new Elysia()
   })
   .use(auth)
   .get("/hi", "Hi, Elysia")
-  .listen(3000);
+  .listen(config.server?.port || 3000);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`

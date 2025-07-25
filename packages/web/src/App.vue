@@ -3,10 +3,17 @@ import { ref } from 'vue';
 import { client } from "./rpc";
 
 const msg = ref('')
+
 client.hi.get().then((res) => {
   msg.value = res.data || 'error'
 })
 
+client.auth.login.post({
+  username: 'admin',
+  password: 'admin'
+}).then((res) => {
+  console.log(res)
+})
 </script>
 
 <template>
@@ -28,9 +35,11 @@ client.hi.get().then((res) => {
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }

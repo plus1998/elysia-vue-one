@@ -1,13 +1,15 @@
-// Service handle business logic, decoupled from Elysia controller
-import type { AuthModel } from './model'
+import { AuthModel } from './model'
+import { User } from '../../entity/user'
 
-// If the class doesn't need to store a property,
-// you may use `abstract class` to avoid class allocation
 export abstract class Auth {
 	static async signIn({ username, password }: AuthModel.signInBody) {
-        console.log(username, password)
+        console.log('登录', username, password)
+		const user = await User.findOne({ username, password })
+		if (!user) {
+			throw new Error('Invalid username or password')
+		}
 		return {
-			token: 'mock',
+			token: user.username,
 			refreshToken: 'mock-refresh'
 		}
 	}
