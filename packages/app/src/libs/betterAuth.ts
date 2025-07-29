@@ -1,10 +1,34 @@
-import { betterAuth } from 'better-auth'
+import { betterAuth } from "better-auth";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { admin } from "better-auth/plugins";
+// modules
+import { db } from "./mongodb";
+import config from "../config";
+
+if (!db.connection.db) throw new Error("MongoDB is not connected");
 
 const BetterAuth = betterAuth({
-  basePath: '/api',
+  database: mongodbAdapter(db.connection.db),
+  plugins: [admin()],
   emailAndPassword: {
-    enabled: true
-  }
-})
+    enabled: true,
+  },
+  trustedOrigins: config.cors?.origin,
+});
 
-export default BetterAuth
+// 默认注册管理员
+try {
+  await BetterAuth.api.createUser({
+    body: {
+      email: "admin@plus.com",
+      password: "public",
+      name: "Admin",
+      role: "admin",
+    },
+  });
+  console.log("[Register Admin]", "Success");
+} catch (error: any) {
+  console.log('[Register Admin]', error.message);
+}
+
+export default BetterAuth;

@@ -1,27 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { client } from "./rpc";
+import { authClient } from './lib/auth';
 
 const msg = ref('')
 
 client.hi.get().then((res) => {
-  msg.value = res.data || 'error'
+  msg.value = res?.data || 'error'
 })
 
-// client.auth.register.post({
-//     username: 'test',
-//     email: 'test@gmail.com',
-//     password: 'Super123456'
-// }).then((res) => {
-//   console.log(res)
-// })
-
-client.auth.login.post({
-    email: 'test@gmail.com',
-    password: 'Super123452'
+authClient.signIn.email({
+  email: 'admin@plus.com',
+  password: 'public'
 }).then((res) => {
   console.log(res)
+  client.demo.get({
+    query: {
+      name: 'demo'
+    }
+  }).then((res) => {
+    console.log(res)
+  })
 })
+
 
 </script>
 

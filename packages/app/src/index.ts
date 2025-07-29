@@ -1,29 +1,23 @@
 import { Elysia } from "elysia";
-import config from "./config";
 // mongodb
 import './libs/mongodb'
 // redis
 import './libs/redis'
 
 import { cors } from "@elysiajs/cors";
-import { auth } from "./modules/auth";
 import BetterAuth from "./libs/betterAuth";
 
+// modules
+import config from "./config";
+import { demo } from "./modules/demo";
+
 const app = new Elysia()
-  .use(cors())
-  // 因为cors对GET不起作用 应该是elysia的bug
-  .onBeforeHandle(async ({ set }) => {
-      set.headers = {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "*",
-          "Access-Control-Allow-Headers": "*",
-      }
-  })
+  .get('/hi', 'Hi, Elysia!')
+  .use(cors({}))
   // better-auth
   .mount(BetterAuth.handler)
   // modules
-  .use(auth)
-  .get("/hi", "Hi, Elysia")
+  .use(demo)
   .listen(config.server?.port || 3000);
 
 console.log(

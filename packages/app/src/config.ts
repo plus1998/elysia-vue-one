@@ -19,13 +19,19 @@ interface Config {
     port: number;
     db?: number;
     username?: string;
-    password?: string; // 不支持特殊字符
+    password?: string; // TOFIX 目前不支持特殊字符
+  };
+  cors?: {
+    origin: string[];
   };
 }
 
 const defaultConfig: Config = {
   server: {
     port: 3003,
+  },
+  cors: {
+    origin: ["http://localhost:5173"],
   },
   mongodb: {
     uri: "mongodb://localhost:27017",
