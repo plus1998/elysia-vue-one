@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 // libs
-import "@/libs/mongodb";
-import "@/libs/redis";
+import "@backend/libs/mongodb";
+import "@backend/libs/redis";
 // modules
 import config from "@backend/config";
 import { DemoController } from "@backend/modules/demo";
