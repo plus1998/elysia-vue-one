@@ -1,56 +1,29 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import { client } from "./rpc";
-import { authClient } from './lib/auth';
-
-const msg = ref('')
-
-client.hi.get().then((res) => {
-  msg.value = res?.data || 'error'
-})
-
-authClient.signIn.email({
-  email: 'admin@plus.com',
-  password: 'public'
-}).then((res) => {
-  console.log(res)
-  client.demo.get({
-    query: {
-      name: 'demo'
-    }
-  }).then((res) => {
-    console.log(res)
-  })
-})
-
-
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <router-view />
   </div>
-  {{ msg }}
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup lang="ts">
+// App.vue 现在只负责显示路由
+// 所有的认证逻辑都移到了路由守卫和各个页面组件中
+</script>
+
+<style>
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
 }
 
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#app {
+  min-height: 100vh;
 }
 </style>
