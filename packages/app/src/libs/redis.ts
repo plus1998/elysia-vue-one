@@ -11,8 +11,5 @@ const url = `redis://${redisConfig.username}:${redisConfig.password}@${redisConf
 console.log('Redis url:', url)
 const redis = new RedisClient(url);
 
-const test = await redis.get('test')
-console.log('Redis test:', test)
-
 export default redis;
 

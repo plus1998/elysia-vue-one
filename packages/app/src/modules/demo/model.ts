@@ -6,29 +6,20 @@ export namespace DemoModel {
   export const GetDemoBody = t.Object({
     name: t.String(),
   });
-  export type GetDemoBody = {
-    name: string;
-  };
+  export type GetDemoBody = typeof GetDemoBody.static;
   export const GetDemoReponse = t.Object({
     _id: t.String(),
     name: t.String(),
   });
-  export type GetDemoReponse = {
-    _id: string;
-    name: string;
-  };
+  export type GetDemoReponse = typeof GetDemoReponse.static;
   /** 新增 */
   export const AddDemoBody = t.Object({
     name: t.String(),
   });
-  export type AddDemoBody = {
-    name: string;
-  };
+  export type AddDemoBody = typeof AddDemoBody.static;
 
   export const AddDemoBodyResponse = t.Object({
     _id: t.String(),
   });
-  export type AddDemoBodyResponse = {
-    _id: string;
-  };
+  export type AddDemoBodyResponse = typeof AddDemoBodyResponse.static;
 }

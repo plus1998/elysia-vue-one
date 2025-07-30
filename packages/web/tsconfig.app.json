@@ -9,7 +9,12 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    /** alias */
+    "paths": {
+      "@backend/*": ["../app/src/*"],
+      "@frontend/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

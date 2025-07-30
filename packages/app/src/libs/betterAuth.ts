@@ -3,7 +3,6 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { admin } from "better-auth/plugins";
 // modules
 import { db } from "./mongodb";
-import config from "../config";
 
 if (!db.connection.db) throw new Error("MongoDB is not connected");
 
@@ -13,7 +12,6 @@ const BetterAuth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  trustedOrigins: config.cors?.origin,
 });
 
 // 默认注册管理员

@@ -2,9 +2,9 @@ import { Elysia } from "elysia";
 
 import { DemoService } from "./service";
 import { DemoModel } from "./model";
-import { BaseReponse } from "../../baseReponse";
+import { BaseReponse } from "@backend/baseReponse";
 
-export const demo = new Elysia({ prefix: "/demo" })
+export const DemoController = new Elysia({ name: "demo", prefix: "/demo" })
   .get(
     "",
     async ({ query }) => {

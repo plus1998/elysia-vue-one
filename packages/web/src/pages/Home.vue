@@ -1,32 +1,19 @@
-<template>
-  <div class="home-container">
-    <header class="app-header">
-      <div class="header-content">
-        <h1>欢迎回来，{{ user?.name }}！</h1>
-        <button @click="handleLogout" class="logout-button">
-          退出登录
-        </button>
-      </div>
-    </header>
-    
-    <main class="app-main">
-      <div class="welcome-card">
-        <h2>应用主页</h2>
-        <p>您已成功登录到系统。</p>
-        <div class="user-info" v-if="user">
-          <p><strong>邮箱:</strong> {{ user.email }}</p>
-          <p><strong>用户ID:</strong> {{ user.id }}</p>
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { authClient } from '../lib/auth'
 
+import rpc from '@frontend/rpc'
+
+const welcomMsg = ref('')
+
+rpc.hi.get().then((res) => {
+  console.log('public', res)
+})
+
+rpc.demo.get({ query: { name: 'demo' } }).then((res) => {
+  welcomMsg.value = res.data?.error || 'welcome to your new project'
+})
 // 定义用户类型
 interface User {
   id: string
@@ -67,6 +54,30 @@ const handleLogout = async () => {
   }
 }
 </script>
+
+<template>
+  <div class="home-container">
+    <header class="app-header">
+      <div class="header-content">
+        <h1>欢迎回来，{{ user?.name }}！</h1>
+        <button @click="handleLogout" class="logout-button">
+          退出登录
+        </button>
+      </div>
+    </header>
+    
+    <main class="app-main">
+      <div class="welcome-card">
+        <h2>应用主页</h2>
+        <p>{{ welcomMsg }}</p>
+        <div class="user-info" v-if="user">
+          <p><strong>邮箱:</strong> {{ user.email }}</p>
+          <p><strong>用户ID:</strong> {{ user.id }}</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
 
 <style scoped>
 .home-container {

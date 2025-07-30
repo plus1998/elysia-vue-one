@@ -1,23 +1,25 @@
 import { Elysia } from "elysia";
-// mongodb
-import './libs/mongodb'
-// redis
-import './libs/redis'
-
-import { cors } from "@elysiajs/cors";
-import BetterAuth from "./libs/betterAuth";
-
+// libs
+import "@/libs/mongodb";
+import "@/libs/redis";
 // modules
-import config from "./config";
-import { demo } from "./modules/demo";
+import config from "@backend/config";
+import { DemoController } from "@backend/modules/demo";
+import { authService } from "./modules/auth";
+import { corsService } from "@backend/modules/cors";
 
 const app = new Elysia()
-  .get('/hi', 'Hi, Elysia!')
-  .use(cors({}))
-  // better-auth
-  .mount(BetterAuth.handler)
-  // modules
-  .use(demo)
+  /** cors */
+  .use(corsService)
+  /** better-auth */
+  .use(authService)
+  /** public */
+  .get("/hi", "Hi,Elysia!")
+  /** protect */
+  .guard({
+    auth: true,
+  })
+  .use(DemoController)
   .listen(config.server?.port || 3000);
 
 console.log(
