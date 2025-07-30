@@ -1,5 +1,5 @@
 import { DemoModel } from "./model";
-import { DemoEntity } from "../../entity/demo";
+import { DemoEntity } from "@backend/entity/demo";
 
 export abstract class DemoService {
   static async getDemo({ name }: DemoModel.GetDemoBody) {

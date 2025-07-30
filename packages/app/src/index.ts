@@ -5,7 +5,7 @@ import "@backend/libs/redis";
 // modules
 import config from "@backend/config";
 import { DemoController } from "@backend/modules/demo";
-import { authService } from "./modules/auth";
+import { authService } from "@backend/modules/auth";
 import { corsService } from "@backend/modules/cors";
 
 const app = new Elysia()
