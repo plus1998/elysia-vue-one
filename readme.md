@@ -12,3 +12,11 @@ bun run dev
 ```bash
 bun run build
 ```
+
+# Libs
+
+- [bun](https://bun.sh/)
+- [vite](https://vitejs.dev/)
+- [vue](https://vuejs.org/)
+= [vue-router](https://router.vuejs.org/)
+- [bullmq](https://docs.bullmq.io/)

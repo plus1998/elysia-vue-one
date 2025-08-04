@@ -1,3 +1,4 @@
+import { RedisOptions } from "ioredis";
 import { ConnectOptions as MongoDBOptions } from "mongoose";
 
 enum Env {
@@ -21,6 +22,9 @@ interface Config {
     username?: string;
     password?: string; // TOFIX 目前不支持特殊字符
   };
+  bull?: {
+    redis: RedisOptions;
+  },
   cors?: {
     origin: string[];
   };
@@ -49,6 +53,15 @@ const defaultConfig: Config = {
     username: "",
     password: "Super123456",
   },
+  bull: {
+    redis: {
+      host: "localhost",
+      port: 6379,
+      db: 1,
+      password: "Super123456",
+      maxRetriesPerRequest: null
+    },
+  }
 };
 
 const configs: Record<Env, Config> = {

@@ -2,6 +2,10 @@ import { Elysia } from "elysia";
 // libs
 import "@backend/libs/mongodb";
 import "@backend/libs/redis";
+// queue
+import { bullBoard } from "@backend/queue";
+import DemoQueue from "@backend/queue/demo";
+
 // modules
 import config from "@backend/config";
 import { DemoController } from "@backend/modules/demo";
@@ -15,6 +19,8 @@ const app = new Elysia()
   .use(authService)
   /** public */
   .get("/hi", "Hi,Elysia!")
+  /** bull-board */
+  .use(bullBoard)
   /** protect */
   .guard({
     auth: true,
@@ -25,4 +31,13 @@ const app = new Elysia()
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
+
+// queue test
+console.log("add demo queue");
+for (let i = 0; i < 10; i++) {
+  DemoQueue.add(DemoQueue.name, {
+    data: "demo" + (i + 1),
+  });
+}
+
 export type App = typeof app;
