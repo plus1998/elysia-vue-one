@@ -8,22 +8,23 @@ import "@backend/queue/demo";
 // shedule
 import "@backend/schedule/demo";
 // bullBoard
-import { bullBoard } from '@backend/libs/bullBoard';
+import { bullBoard } from "@backend/libs/bullBoard";
 // modules
 import config from "@backend/config";
+import cors from "@elysiajs/cors";
+import { HomeController } from "@backend/modules/home";
 import { DemoController } from "@backend/modules/demo";
 import { authService } from "@backend/modules/auth";
-import { corsService } from "@backend/modules/cors";
 
 const app = new Elysia()
   /** cors */
-  .use(corsService)
+  .use(cors())
   /** better-auth */
   .use(authService)
-  /** public */
-  .get("/hi", "Hi,Elysia!")
   /** bull-board */
   .use(bullBoard)
+  /** public */
+  .use(HomeController)
   /** protect */
   .guard({
     auth: true,
@@ -36,11 +37,11 @@ console.log(
 );
 
 setTimeout(() => {
-  const queue = Queues.get('Demo')
-  for(let i = 0; i < 10; i++) {
+  const queue = Queues.get("Demo");
+  for (let i = 0; i < 10; i++) {
     queue?.add(queue.name, {
-        id: i,
-      });
+      id: i,
+    });
   }
 }, 5000);
 

@@ -7,12 +7,13 @@ import rpc from '@frontend/rpc'
 
 const welcomMsg = ref('')
 
-rpc.hi.get().then((res) => {
-  console.log('public', res)
+rpc.home.hi.get().then((res) => {
+  console.log(res)
+  welcomMsg.value = res.data || 'welcome to your new project'
 })
 
 rpc.demo.get({ query: { name: 'demo' } }).then((res) => {
-  welcomMsg.value = res.data?.error || 'welcome to your new project'
+  console.log(res)
 })
 // 定义用户类型
 interface User {
