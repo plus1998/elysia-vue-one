@@ -2,6 +2,8 @@ import { Elysia } from "elysia";
 // libs
 import "@backend/libs/mongodb";
 import "@backend/libs/redis";
+// schedule
+import '@backend/schedule'
 // queue
 import { bullBoard } from "@backend/queue";
 import DemoQueue from "@backend/queue/demo";
