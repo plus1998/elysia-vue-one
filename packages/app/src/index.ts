@@ -2,12 +2,13 @@ import { Elysia } from "elysia";
 // libs
 import "@backend/libs/mongodb";
 import "@backend/libs/redis";
-// schedule
-import '@backend/schedule'
 // queue
-import { bullBoard } from "@backend/queue";
-import DemoQueue from "@backend/queue/demo";
-
+import { Queues } from "@backend/libs/queue";
+import "@backend/queue/demo";
+// shedule
+import "@backend/schedule/demo";
+// bullBoard
+import { bullBoard } from '@backend/libs/bullBoard';
 // modules
 import config from "@backend/config";
 import { DemoController } from "@backend/modules/demo";
@@ -34,12 +35,13 @@ console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
 
-// queue test
-console.log("add demo queue");
-for (let i = 0; i < 10; i++) {
-  DemoQueue.add(DemoQueue.name, {
-    data: "demo" + (i + 1),
-  });
-}
+setTimeout(() => {
+  const queue = Queues.get('Demo')
+  for(let i = 0; i < 10; i++) {
+    queue?.add(queue.name, {
+        id: i,
+      });
+  }
+}, 5000);
 
 export type App = typeof app;
