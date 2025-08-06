@@ -1,15 +1,12 @@
+import { prop, getModelForClass } from '@typegoose/typegoose';
 import { db } from "../libs/mongodb";
-import { Schema, InferSchemaType } from "mongoose";
 
-const DemoSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+export class Demo {
+  @prop({ type: String, required: true, unique: true })
+  public name!: string;
+}
+
+export const DemoEntity = getModelForClass(Demo, { 
+  existingConnection: db.connection 
 });
-
-const demoModel = db.model("Demo", DemoSchema);
-
-export type DemoEntity = InferSchemaType<typeof DemoSchema>;
-export const DemoEntity = demoModel;
+export type DemoEntity = Demo;
