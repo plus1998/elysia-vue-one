@@ -6,12 +6,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:app": "bun run --watch packages/app/src/index.ts",
+    "dev:app": "bun run --preload ./packages/app/src/loader.ts --watch packages/app/src/index.ts",
     "dev:web": "vite dev packages/web",
-    "dev": "NODE_ENV=development bun run.ts",
     "build:app": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile build/app packages/app/src/index.ts",
     "build:web": "vite build packages/web --outDir ../../build/dist",
-    "build": "bun run build:app && bun run build:web"
+    "dev": "NODE_ENV=development bun run.ts",
+    "build": "bun build.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.2.19"

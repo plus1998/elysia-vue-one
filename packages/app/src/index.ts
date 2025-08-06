@@ -1,12 +1,10 @@
 import { Elysia } from "elysia";
 // libs
+import '@backend/imports'
 import "@backend/libs/mongodb";
 import "@backend/libs/redis";
 // queue
 import { Queues } from "@backend/libs/queue";
-import "@backend/queue/demo";
-// shedule
-import "@backend/schedule/demo";
 // bullBoard
 import { bullBoard } from "@backend/libs/bullBoard";
 // modules
