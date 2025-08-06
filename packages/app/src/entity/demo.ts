@@ -1,5 +1,5 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import { db } from "../libs/mongodb";
+import { db } from "@backend/libs/mongodb";
 
 export class Demo {
   @prop({ type: String, required: true, unique: true })
