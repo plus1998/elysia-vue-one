@@ -3,11 +3,13 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { admin } from "better-auth/plugins";
 // modules
 import { db } from "./mongodb";
+import config from "@backend/config";
 
 if (!db.connection.db) throw new Error("MongoDB is not connected");
 
 const BetterAuth = betterAuth({
   database: mongodbAdapter(db.connection.db),
+  trustedOrigins: config.cors?.origin || [],
   plugins: [admin()],
   emailAndPassword: {
     enabled: true,
