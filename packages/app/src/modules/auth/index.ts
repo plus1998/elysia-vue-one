@@ -6,6 +6,7 @@ export const authService = new Elysia({ name: "better-auth" })
   .macro({
     auth: {
       async resolve({ status, request: { headers } }) {
+
         const session = await BetterAuth.api.getSession({
           headers,
         });
