@@ -35,7 +35,7 @@ const defaultConfig: Config = {
     port: 3003,
   },
   cors: {
-    origin: ["http://localhost:5174"],
+    origin: ["http://localhost:5173"],
   },
   mongodb: {
     uri: "mongodb://localhost:27017",
